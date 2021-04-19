@@ -7,18 +7,16 @@
 
 ## users テーブル
 
-| Column      | Type   | Options     |
-| ----------- | ------ | ----------- |
-| nickname    | string | null: false |
-| email       | string | null: false |
-| password    | string | null: false |
-| first_name  | string | null: false |
-| last_name   | string | null: false |
-| first_read  | string | null: false |
-| last_read   | string | null: false |
-| birth_year  | string | null: false |
-| birth_month | string | null: false |
-| birth_day   | string | null: false |
+| Column                | Type   | Options                   |
+| --------------------- | ------ | ------------------------- |
+| nickname              | string | null: false               |
+| email                 | string | null: false, unique: true |
+| encrypted_password    | string | null: false               |
+| first_name            | string | null: false               |
+| last_name             | string | null: false               |
+| first_read            | string | null: false               |
+| last_read             | string | null: false               |
+| birthday              | date   | null: false               |
 
 
 ### Association
@@ -27,17 +25,16 @@
 
 ## items テーブル
 
-| Column     | Type       | Options                        |
-| ---------- | ---------- | ------------------------------ |
-| title      | string     | null: false                    |
-| image      | text       | null: false                    |
-| price      | string     | null: false                    |
-| category   | string     | null: false                    |
-| state      | string     | null: false                    |
-| charge     | string     | null: false                    |
-| from       | string     | null: false                    |
-| move       | string     | null: false                    |
-| user       | references | null: false, foreign_key: true |
+| Column     | Type        | Options                        |
+| ---------- | ----------- | ------------------------------ |
+| title      | string      | null: false                    |
+| price      | integer     | null: false                    |
+| category   | string      | null: false                    |
+| state      | string      | null: false                    |
+| charge     | string      | null: false                    |
+| from       | string      | null: false                    |
+| move       | string      | null: false                    |
+| user       | references  | null: false, foreign_key: true |
 
 
 ### Association
