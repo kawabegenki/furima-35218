@@ -25,21 +25,21 @@
 
 ## items テーブル
 
-| Column     | Type        | Options                        |
-| ---------- | ----------- | ------------------------------ |
-| title      | string      | null: false                    |
-| price      | integer     | null: false                    |
-| category   | string      | null: false                    |
-| state      | string      | null: false                    |
-| charge     | string      | null: false                    |
-| from       | string      | null: false                    |
-| move       | string      | null: false                    |
-| user       | references  | null: false, foreign_key: true |
+| Column        | Type        | Options                        |
+| ------------- | ----------- | ------------------------------ |
+| title         | string      | null: false                    |
+| price         | integer     | null: false                    |
+| category_id   | integer     | null: false                    |
+| state_id      | integer     | null: false                    |
+| charge_id     | integer     | null: false                    |
+| from_id       | integer     | null: false                    |
+| move_id       | integer     | null: false                    |
+| user          | references  | null: false, foreign_key: true |
 
 
 ### Association
 - belongs_to :user
-- has_one    :item
+- has_one    :history
 
 
 ## histories テーブル
@@ -56,18 +56,14 @@
 
 ## accounts テーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| card_num      | string     | null: false                    |
-| limit_year    | string     | null: false                    |
-| limit_month   | string     | null: false                    |
-| security_cord | string     | null: false                    |
-| postal_cord   | string     | null: false                    |
-| pay_from      | string     | null: false                    |
-| city          | string     | null: false                    |
-| addresses     | string     | null: false                    |
-| building      | string     | null: true                     |
-| phone_number  | string     | null: false                    |
+| Column        | Type       | Options     |
+| ------------- | ---------- | ----------- |
+| postal_cord   | string     | null: false |
+| pay_from      | string     | null: false |
+| city          | string     | null: false |
+| addresses     | string     | null: false |
+| building      | string     |             |
+| phone_number  | string     | null: false |
 
 ### Association
 - belongs_to :account
