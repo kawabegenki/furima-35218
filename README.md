@@ -29,6 +29,7 @@
 | ------------- | ----------- | ------------------------------ |
 | title         | string      | null: false                    |
 | price         | integer     | null: false                    |
+| content       | text        | null: false                    |
 | category_id   | integer     | null: false                    |
 | state_id      | integer     | null: false                    |
 | charge_id     | integer     | null: false                    |
@@ -64,6 +65,7 @@
 | addresses     | string     | null: false |
 | building      | string     |             |
 | phone_number  | string     | null: false |
+| history       | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :account
+- belongs_to :history
