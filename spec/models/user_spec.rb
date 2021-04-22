@@ -33,13 +33,35 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
+      it '@が必須であること' do
+        @user.email = 'ttestgmail.jp'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
+      end
+      it '重複したemailが存在する場合登録できない' do
+        @user.save
+        another_user = FactoryBot.build(:user)
+        another_user.email = @user.email
+        another_user.valid?
+        expect(another_user.errors.full_messages).to include('Email has already been taken')
+      end
       it 'パスワードが必須であること' do
         @user.password = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
-      it 'パスワードが英数字を含むこと' do
+      it 'パスワードが英語だけでは登録できない' do
         @user.password = 'aaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password に半角英数字を使用してください", "Password confirmation doesn't match Password")
+      end
+      it '・半角数字のみでは登録できないこと' do
+        @user.password = '000000'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password に半角英数字を使用してください", "Password confirmation doesn't match Password")
+      end
+      it '・全角では登録できないこと' do
+        @user.password = 'AAAAAA'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password に半角英数字を使用してください", "Password confirmation doesn't match Password")
       end
@@ -75,11 +97,20 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name に全角文字を使用してください")
       end
-      it 'ユーザー本名のフリガナは、全角（カタカナ）の入力が必須であること' do
-        @user.last_read = 'AAAA'
+      it 'ユーザー本名の名前のフリガナは、カタカナ以外の全角文字だと登録できないこと' do
+        @user.last_read = 'AAA％'
+        @user.valid?
+        expect(@user.errors.full_messages).to include( "Last read はカタカナで入力して下さい。")
+      end
+      it '空だと登録できない' do
+        @user.last_read = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include( "Last read can't be blank")
+      end
+      it 'ユーザー本名の苗字フリガナは、全角（カタカナ）の入力が必須であること' do
         @user.first_read = 'AAAA'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password に半角英数字を使用してください", "First read はカタカナで入力して下さい。", "Last read はカタカナで入力して下さい。")
+        expect(@user.errors.full_messages).to include( "First read はカタカナで入力して下さい。")
       end
       it '生年月日が必要であること。' do
         @user.birthday = ''

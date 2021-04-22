@@ -1,7 +1,11 @@
 class User < ApplicationRecord
  
-  validates :nickname  , presence: true
-  validates :birthday  , presence: true
+  
+  with_options presence: true do
+    validates :nickname  
+    validates :birthday  
+  end
+  
   validates :password  , presence: true ,format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze , message: 'に半角英数字を使用してください'}
   
   with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/.freeze, message: 'に全角文字を使用してください' } do
