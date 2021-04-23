@@ -1,6 +1,8 @@
 class User < ApplicationRecord
- 
+# アソシエーション
+  has_many :items
   
+# バリデーション
   with_options presence: true do
     validates :nickname  
     validates :birthday  
@@ -18,6 +20,7 @@ class User < ApplicationRecord
   validates :last_read 
   end
 
+# デバイス
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
