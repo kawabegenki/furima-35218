@@ -4,7 +4,11 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category, :state, :charge, :from, :move
+  belongs_to :category
+  belongs_to :state
+  belongs_to :charge
+  belongs_to :from
+  belongs_to :move
 
   # バリデーション
   with_options numericality: { other_than: 1, message: 'を選択してください' } do
