@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
     // 数値化
     const inputPrice = price.value;
     // 抜かれる金額を計算
-    const taxResult = Math.round((inputPrice * tax) / 100);
+    const taxResult = Math.floor((inputPrice * tax) / 100);
     // 数値として代入
     taxDom.innerHTML = taxResult;
     // 税を抜かれた後を計算
