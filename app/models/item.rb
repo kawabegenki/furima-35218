@@ -5,9 +5,13 @@ class Item < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :state
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :charge
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :from
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :move
 
   # バリデーション
