@@ -4,21 +4,27 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category,:state,:charge,:from,:move
-  
-  #バリデーション
-  with_options  numericality: { other_than: 1 } do
-    validates :category_id 
+  belongs_to :category, :state, :charge, :from, :move
+
+  # バリデーション
+  with_options numericality: { other_than: 1, message: 'を選択してください' } do
+    validates :category_id
     validates :state_id
     validates :charge_id
-    validates :from_id 
+    validates :from_id
     validates :move_id
   end
-# タイトルなど特殊バリデーションは最後
-  validates :image     , presence: true, unless: :was_attached?
 
-  def was_attached?
-    self.image.attached?
+  with_options presence: true do
+    validates :title
+    validates :content
+    validates :image
+    validates :price, numericality: true, inclusion: { in: 300..9_999_999, message: 'が範囲を超えています' }, format: { with: /\A[0-9]+\z/ }
   end
 
+  # タイトルなど特殊バリデーションは最後
+
+  def was_attached?
+    image.attached?
+  end
 end
