@@ -24,7 +24,4 @@ class Item < ApplicationRecord
 
   # タイトルなど特殊バリデーションは最後
 
-  def was_attached?
-    image.attached?
-  end
 end

@@ -13,7 +13,7 @@ RSpec.describe Item, type: :model do
       end
     end
 
-    context '新規登録できるない時' do
+    context '新規登録できる時' do
       it '商品名が必須であること' do
         @item.title = ''
         @item.valid?
