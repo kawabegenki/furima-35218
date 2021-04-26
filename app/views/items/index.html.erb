@@ -131,13 +131,6 @@
           <%= link_to  "#" do %>
             <div class='item-img-content'>
             <%= image_tag "item-sample.png", class: "item-img" %>
-               <%# 以後の機能追加で使用予定。%>
-               <%# 商品が売れていればsold outを表示しましょう %>
-               <%#= image_tag "item-sample.png", class: "item-img" %>
-                <%#div class='sold-out'>
-                  <span>Sold Out!!</span>
-                </div%>
-                <%# //商品が売れていればsold outを表示しましょう 販売履歴フラグがあれば表示 %>
               </div>
               <div class='item-info'>
                 <h3 class='item-name'>
@@ -158,7 +151,6 @@
             <%= link_to  item_path(item.id) do %>
             <div class='item-img-content'>
             <%= image_tag(item.image, class: "item-img" ) %>
-            <%#= image_tag "item-sample.png", class: "item-img" %>
               <%# 商品が売れていればsold outを表示しましょう %>
               <%#div class='sold-out'>
                 <span>Sold Out!!</span>
