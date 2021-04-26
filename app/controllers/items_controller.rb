@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
   end
 
   def new
+    # 登録順に並べる
     @item = Item.new.order(created_at: :desc)
   end
 
