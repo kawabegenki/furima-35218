@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:index,:show]
+  before_action :authenticate_user!, except: [:index]
 
   def index
     # 登録順に並べる
@@ -20,13 +20,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
-  end
-
-  def delete
-  end
-
-  def edit
+    # @item = Prototype.find(params[:id])
   end
 
   private
