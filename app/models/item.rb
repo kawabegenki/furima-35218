@@ -27,5 +27,4 @@ class Item < ApplicationRecord
   end
 
   # タイトルなど特殊バリデーションは最後
-
 end
