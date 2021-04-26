@@ -2,12 +2,12 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @items = Item.all
+    # 登録順に並べる
+    @items = Item.all.order(created_at: :desc)
   end
 
   def new
-    # 登録順に並べる
-    @item = Item.new.order(created_at: :desc)
+    @item = Item
   end
 
   def create
