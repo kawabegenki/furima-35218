@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Prototype.find(params[:id])
+    # @item = Prototype.find(params[:id])
   end
 
   private
