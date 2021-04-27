@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
+
   def index
     # 登録順に並べる
     @items = Item.all.order(created_at: :desc)
