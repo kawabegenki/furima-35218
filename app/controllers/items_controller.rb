@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :show,:update]
 
   def index
-    # 登録順に並べる
     @items = Item.all.order(created_at: :desc)
   end
 
@@ -31,11 +30,12 @@ class ItemsController < ApplicationController
   end
 
   def update
-    
-    if @item.update(item_params)
-      redirect_to item_path(@item.id)
-    else
-      render :edit
+    if @item.user == current_user
+      if @item.update(item_params)
+        redirect_to item_path(@item.id)
+      else
+        render :edit
+      end
     end
   end
 
