@@ -1,9 +1,6 @@
 class Order < ApplicationRecord
 # Association
-belongs_to :user
-belongs_to :item
-has_one    :account
-
+belongs_to :history
 attr_accessor :token
 
 # バリデーション

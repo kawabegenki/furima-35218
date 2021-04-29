@@ -53,9 +53,9 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one    :account
+- has_one    :orders
 
-## accounts テーブル
+## orders テーブル
 
 | Column        | Type       | Options     |
 | ------------- | ---------- | ----------- |
