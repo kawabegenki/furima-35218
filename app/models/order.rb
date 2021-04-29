@@ -1,17 +1,17 @@
 class Order < ApplicationRecord
-  # Association
+# Association
 belongs_to :user
 belongs_to :item
 has_one    :account
 
-# accounts テーブル
+attr_accessor :token
 
+# バリデーション
 validates :postal_cord  
 validates :pay_from      
 validates :city          
 validates :addresses     
 validates :building   
-validates :phone_number  
-validates :history     
+validates :phone_number     
 
 end
