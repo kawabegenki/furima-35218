@@ -3,12 +3,14 @@ class HistoryOrder
   include ActiveModel::Model
   attr_accessor :postal_cord,:pay_from,:city,:addresses,:building,:phone_number,:user_id,:item_id,:token
   
+  validates :token, presence: true
+
   with_options presence: true do
-    validates :postal_cord   
-    validates :pay_from     
-    validates :city          
-    validates :addresses     
-    validates :phone_number 
+    validates :postal_cord   ,format: { with: /\A\d{3}[-]\d{4}\z/ }
+    validates :pay_from      ,numericality: { other_than: 1, message: 'を選択してください' }
+    validates :city          , format: { with: /\A[ぁ-んァ-ン一-龥]+\z/.freeze, message: 'に全角文字を使用してください' }
+    validates :addresses     , format: { with: /\A[ぁ-んァ-ン一-龥]+\z/.freeze, message: 'に全角文字を使用してください' }
+    validates :phone_number ,format: { with: /\A\d{10,11}\z/ }
   end
 
 

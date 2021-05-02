@@ -21,7 +21,6 @@ class OrdersController < ApplicationController
   private
 
   def history_order_params
-    binding.pry
     params.require(:history_order).permit(:postal_cord ,:pay_from , :city , :addresses , :building , :phone_number ,:user_id).merge(token: params[:token],user_id: current_user.id,item_id: params[:item_id])
   end
 
