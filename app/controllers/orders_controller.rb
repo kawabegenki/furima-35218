@@ -1,36 +1,35 @@
 class OrdersController < ApplicationController
+  
   def index
-   # @order = Order.new
+    @item = Item.find(params[:item_id])
+    @history_order = HistoryOrder.new
   end
 
   def create
-    #@order = Order.new(order_params)
-    #if @order.valid?
-    #  pay_item
-    #  Payjp.api_key = "sk_test_ec2b62a882c1fd867003c645"  # 自身のPAY.JPテスト秘密鍵を記述しましょう
-    #  Payjp::Charge.create(
-    #  amount: order_params[:price],  # 商品の値段
-    #   card: order_params[:token],    # カードトークン
-    #  currency: 'jpy'                 # 通貨の種類（日本円）
-    #)
-    #@order.save
-    #return redirect_to root_path
-    #else
-    #render 'index'
-    # end
+    @item = Item.find(params[:item_id])
+    @history_order = HistoryOrder.new(history_order_params)
+    
+    if @history_order.valid?
+      pay_item
+      @history_order.save
+      return redirect_to root_path
+    else
+      render 'index'
+    end
   end
 
   private
 
-  def order_params
-    params.require(:order).permit(:price).merge(token: params[:token])
+  def history_order_params
+    binding.pry
+    params.require(:history_order).permit(:postal_cord ,:pay_from , :city , :addresses , :building , :phone_number ,:user_id).merge(token: params[:token],user_id: current_user.id,item_id: params[:item_id])
   end
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
     Payjp::Charge.create(
-      amount: order_params[:price],  # 商品の値段
-      card: order_params[:token],    # カードトークン
+      amount: @item.price                  ,    # 商品の値段
+      card:   history_order_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end
