@@ -25,7 +25,7 @@
     </div>
 
     <%# ログインしていて且つ商品が売れていないとき%>
-    <% if user_signed_in? && @item.histories.present? == false %>
+    <% if user_signed_in? && @item.histories.blank?  %%>
       <%# 出品者か否か%>
       <%if current_user.id == @item.user_id %>
         <%= link_to "編集する",  edit_item_path(@item.id), class: "item-red-btn" ,method: :get%>
