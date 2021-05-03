@@ -51,7 +51,7 @@ RSpec.describe HistoryOrder, type: :model do
       it 'addressはkaraでは購入できないこと' do
         @history_order.addresses = ''
         @history_order.valid?
-        expect(@history_order.errors.full_messages).to include('City に全角文字を使用してください')
+        expect(@history_order.errors.full_messages).to include("Addresses can't be blank")
       end
       it 'phone_numberは空では購入できないこと' do
         @history_order.phone_number = ''

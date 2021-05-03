@@ -1,11 +1,13 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_params
+  before_action :block
+
   def index
-    @item = Item.find(params[:item_id])
+    
     @history_order = HistoryOrder.new
   end
-
   def create
-    @item = Item.find(params[:item_id])
     @history_order = HistoryOrder.new(history_order_params)
 
     if @history_order.valid?
@@ -32,5 +34,14 @@ class OrdersController < ApplicationController
       card: history_order_params[:token], # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def set_params
+    @item = Item.find(params[:item_id])
+  end
+
+  def block
+    redirect_to root_path if @item.histories.present?
+    redirect_to root_path if @item.user == current_user
   end
 end
