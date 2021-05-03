@@ -51,6 +51,8 @@ class ItemsController < ApplicationController
   end
 
   def woop
-    redirect_to action: :index unless @item.user == current_user ||  if @item.histories.present?
+    if @item.user != current_user || @item.histories.present?
+      redirect_to action: :index 
+    end
   end
 end

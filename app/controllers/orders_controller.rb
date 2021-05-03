@@ -42,4 +42,6 @@ class OrdersController < ApplicationController
 
   def block
     redirect_to root_path if @item.histories.present? || @item.user == current_user
+  end
 end
+
