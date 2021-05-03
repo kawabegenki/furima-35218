@@ -15,6 +15,10 @@ RSpec.describe HistoryOrder, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@history_order).to be_valid
       end
+      it 'buildがからでも保存できること' do
+        @history_order.building = ''
+        expect(@history_order).to be_valid
+      end
     end
 
     context '内容に問題がある場合' do
@@ -22,6 +26,16 @@ RSpec.describe HistoryOrder, type: :model do
         @history_order.token = ''
         @history_order.valid?
         expect(@history_order.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが空だと購入できないこと' do
+        @history_order.user_id = ''
+        @history_order.valid?
+        expect(@history_order.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空だと購入できないこと' do
+        @history_order.item_id = ''
+        @history_order.valid?
+        expect(@history_order.errors.full_messages).to include("Item can't be blank")
       end
       it 'postal_codeが空だと購入できないこと' do
         @history_order.postal_cord = ''
@@ -60,6 +74,16 @@ RSpec.describe HistoryOrder, type: :model do
       end
       it 'phone_numberは数字以外では購入できないこと' do
         @history_order.phone_number = 'あああああ'
+        @history_order.valid?
+        expect(@history_order.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'phone_numberは12文字以上では購入できないこと' do
+        @history_order.phone_number = '090999999999999'
+        @history_order.valid?
+        expect(@history_order.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'phone_numberは9文字以下では購入できないこと' do
+        @history_order.phone_number = '090'
         @history_order.valid?
         expect(@history_order.errors.full_messages).to include('Phone number is invalid')
       end
