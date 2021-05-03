@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   # アソシエーション
   belongs_to :user
+  has_many   :histories
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -25,4 +26,6 @@ class Item < ApplicationRecord
     validates :image
     validates :price, numericality: true, inclusion: { in: 300..9_999_999, message: 'が範囲を超えています' }, format: { with: /\A[0-9]+\z/ }
   end
+
+  # タイトルなど特殊バリデーションは最後
 end

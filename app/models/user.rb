@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # アソシエーション
   has_many :items
+  has_many :histories
 
   # バリデーション
   with_options presence: true do

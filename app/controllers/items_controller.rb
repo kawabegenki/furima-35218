@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_item, only: [:edit, :show,:update,:destroy]
-  before_action :woop, only: [:edit,:update,:destroy]
+  before_action :set_item, only: [:edit, :show, :update, :destroy]
+  before_action :woop, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -32,8 +32,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    
-    if @item.update(item_params) 
+    if @item.update(item_params)
       redirect_to item_path(@item.id)
     else
       render :edit
@@ -43,14 +42,15 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:title, :price, :content, :category_id, :state_id, :charge_id, :from_id, :move_id,:image).merge(user_id: current_user.id)
+    params.require(:item).permit(:title, :price, :content, :category_id, :state_id, :charge_id, :from_id, :move_id,
+                                 :image).merge(user_id: current_user.id)
   end
 
   def set_item
     @item = Item.find(params[:id])
   end
 
-  def woop 
-    redirect_to action: :index unless @item.user == current_user 
+  def woop
+    redirect_to action: :index unless @item.user == current_user ||  if @item.histories.present?
   end
 end
