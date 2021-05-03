@@ -87,6 +87,11 @@ RSpec.describe HistoryOrder, type: :model do
         @history_order.valid?
         expect(@history_order.errors.full_messages).to include('Phone number is invalid')
       end
+      it 'phone_numberは英数金剛では購入できないこと' do
+        @history_order.phone_number = '090123412aa'
+        @history_order.valid?
+        expect(@history_order.errors.full_messages).to include('Phone number is invalid')
+      end
     end
   end
 end
