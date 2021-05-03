@@ -8,6 +8,7 @@ class HistoryOrder
     validates :postal_cord, format: { with: /\A\d{3}-\d{4}\z/ }
     validates :pay_from, numericality: { other_than: 1, message: 'を選択してください' }
     validates :city, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/.freeze, message: 'に全角文字を使用してください' }
+    validates :addresses
     validates :phone_number, format: { with: /\A\d{10,11}\z/ }
   end
 

@@ -38,22 +38,27 @@ RSpec.describe HistoryOrder, type: :model do
         @history_order.valid?
         expect(@history_order.errors.full_messages).to include('Pay from を選択してください')
       end
-      it 'cityは空では保存できないこと' do
+      it 'cityは空では購入できないこと' do
         @history_order.city = ''
         @history_order.valid?
         expect(@history_order.errors.full_messages).to include("City can't be blank")
       end
-      it 'cityは半角では保存できないこと' do
+      it 'cityは半角では購入できないこと' do
         @history_order.city = 'katushikaku'
         @history_order.valid?
         expect(@history_order.errors.full_messages).to include('City に全角文字を使用してください')
       end
-      it 'phone_numberは空では保存できないこと' do
+      it 'addressはkaraでは購入できないこと' do
+        @history_order.addresses = ''
+        @history_order.valid?
+        expect(@history_order.errors.full_messages).to include('City に全角文字を使用してください')
+      end
+      it 'phone_numberは空では購入できないこと' do
         @history_order.phone_number = ''
         @history_order.valid?
         expect(@history_order.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberは文字では保存できないこと' do
+      it 'phone_numberは数字以外では購入できないこと' do
         @history_order.phone_number = 'あああああ'
         @history_order.valid?
         expect(@history_order.errors.full_messages).to include('Phone number is invalid')
