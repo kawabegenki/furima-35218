@@ -60,6 +60,10 @@ group :development do
   gem 'rubocop', require: false
 end
 
+group :production do
+  gem 'unicorn', '5.4.1'
+end
+
   gem 'pry-rails'
   gem 'devise'
   gem 'payjp'
@@ -67,3 +71,4 @@ end
   gem 'image_processing', '~> 1.2'
   gem 'active_hash'
   gem "aws-sdk-s3", require: false
+  
